@@ -36,7 +36,7 @@ const Home = () => {
     // Qui fetcho la carta ricercata
     const handleSearch = async (query) => {
         try {
-            const response = await fetch(`https://api.scryfall.com/cards/search?q=${encodeURIComponent(query)}`);
+            const response = await fetch(`https://api.scryfall.com/cards/search?q=${query}`);
             if (!response.ok) {
                 throw new Error('Errore nella ricerca.');
             }
@@ -64,8 +64,8 @@ const Home = () => {
             {searchResults.length === 0 && (
                 <Container>
                     <Row>
-                        <Col><TopPricedCardsTable title="Top expensive cards in NA of the day" topPricedCards={topPricedCardsUSD} /></Col>
-                        <Col><TopPricedCardsTable title="Top expensive cards in EU of the day" topPricedCards={topPricedCardsEUR} /></Col>
+                        <Col><TopPricedCardsTable title="Top expensive cards in NA today" topPricedCards={topPricedCardsUSD} /></Col>
+                        <Col><TopPricedCardsTable title="Top expensive cards in EU today" topPricedCards={topPricedCardsEUR} /></Col>
                     </Row>
                 </Container>
             )}
