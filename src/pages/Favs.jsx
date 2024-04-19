@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import MainCard from '../components/MainCard';
 import Pagination from 'react-bootstrap/Pagination';
 
-const Favs = ({ userId }) => {
+const Favs = () => {
+  const userId = localStorage.getItem('userId');
   const [favoriteCards, setFavoriteCards] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(10);
@@ -11,7 +12,7 @@ const Favs = ({ userId }) => {
   useEffect(() => {
     const fetchFavoriteCards = async () => {
       try {
-        const response = await fetch(`http://localhost:44344/api/Favs?userId=${userId}`);
+        const response = await fetch(`http://localhost:44365/api/Favs?userId=${userId}`);
         const data = await response.json();
         setFavoriteCards(data);
       } catch (error) {

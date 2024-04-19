@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -12,15 +12,21 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:44344/api/Users/Login', {
+      const response = await fetch('https://localhost:44365/api/Users/Login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password,  })
+        body: JSON.stringify({ email, password })
       });
 
       if (response.ok) {
+        const data = await response.json(); 
+        const { accessToken, userId } = data;
+
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('userId', userId);
+
         navigate('/');
       } else {
         console.error('Errore durante il login');
@@ -57,6 +63,8 @@ const Auth = () => {
         <Button variant="primary" type="submit">
           Login
         </Button>
+
+        <Link to="/registration"><p>Don't have an account? Sign up here.</p></Link>
       </Form>
     </Container>
   );

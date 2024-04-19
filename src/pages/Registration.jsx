@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form, Button, Container, Alert } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Registration = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [gender, setGender] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,9 +18,9 @@ const Registration = () => {
       setError("Passwords do not match");
       return;
     }
-    
+
     try {
-      const response = await fetch('http://localhost:44344/api/Users/Register', {
+      const response = await fetch('https://localhost:44365/api/Users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,14 +32,18 @@ const Registration = () => {
           gender
         }),
       });
-      
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Registration failed');
       }
-      
-      console.log('Registration successful');
-      // Qua ci devo mettere un modale di successo o qualcosa che avverta l'utente e un reindirizzamento sulla home
+
+      setSuccess(true);
+
+      setTimeout(() => {
+        navigate('/auth');
+      }, 3000);
+
     } catch (error) {
       setError(error.message);
     }
@@ -46,9 +53,8 @@ const Registration = () => {
     <Container>
       <h2>Registration</h2>
 
-      {/* questo messaggio di errore lo devo fare un po' piu carino */}
-
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <Alert variant="danger">{error}</Alert>}
+      {success && <Alert variant="success">Registration successful. Redirecting to login page...</Alert>}
       <Form onSubmit={handleSubmit}>
 
         <Form.Group controlId="formBasicEmail">
@@ -134,4 +140,3 @@ const Registration = () => {
 };
 
 export default Registration;
-

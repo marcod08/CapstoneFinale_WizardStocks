@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Form, Button, Col } from 'react-bootstrap';
 
-const UserPanel = ({ userId }) => {
+const UserPanel = () => {
+    const userId = localStorage.getItem('userId');
     const [user, setUser] = useState({
         email: '',
         password: '',
@@ -13,7 +14,7 @@ const UserPanel = ({ userId }) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await fetch(`http://localhost:44344/api/Users/${userId}`);
+                const response = await fetch(`https://localhost:44365/api/Users/${userId}`);
                 const userData = await response.json();
                 setUser(userData);
             } catch (error) {
@@ -33,7 +34,7 @@ const UserPanel = ({ userId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await fetch(`http://localhost:44344/api/Users/${userId}`, {
+            await fetch(`https://localhost:44365/api/Users/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
