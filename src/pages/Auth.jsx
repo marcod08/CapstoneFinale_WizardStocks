@@ -3,11 +3,13 @@ import { useNavigate, Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Alert from 'react-bootstrap/Alert';
 
 const Auth = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [alertMessage, setAlertMessage] = useState(null); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,16 +31,18 @@ const Auth = () => {
 
         navigate('/');
       } else {
-        console.error('Errore durante il login');
+        setAlertMessage('Invalid email or password. Please try again.');
       }
     } catch (error) {
       console.error('Errore durante il login:', error);
+      setAlertMessage('An error occurred while logging in. Please try again later.'); 
     }
   };
 
   return (
     <Container>
       <h2>Login</h2>
+      {alertMessage && <Alert variant="danger">{alertMessage}</Alert>} 
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="email">
           <Form.Label>Email</Form.Label>

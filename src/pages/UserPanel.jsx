@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Form, Button, Col } from 'react-bootstrap';
+import { Container, Form, Button, Col, Alert } from 'react-bootstrap';
 
 const UserPanel = () => {
     const userId = localStorage.getItem('userId');
@@ -9,21 +9,26 @@ const UserPanel = () => {
         birthDate: '',
         gender: ''
     });
+    const [successMessage, setSuccessMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
+    const accessToken = localStorage.getItem('accessToken');
 
-    // Qua fetcho i valori dell'utente sulle mie api
+    // Qua fetcho i valori dell'utente dalle mie api
     useEffect(() => {
         const fetchUser = async () => {
             try {
                 const response = await fetch(`https://localhost:44365/api/Users/${userId}`);
                 const userData = await response.json();
-                setUser(userData);
+                const birthDate = userData.birthDate.substring(0, 10); // qui taglio la data per poter popolare l'input field con un valore compatibile
+                
+                setUser({ ...userData, birthDate });
             } catch (error) {
                 console.error('Errore durante il recupero dei dati dell\'utente:', error);
             }
         };
 
         fetchUser();
-    }, [userId]);
+    }, [userId, accessToken]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,22 +39,32 @@ const UserPanel = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await fetch(`https://localhost:44365/api/Users/${userId}`, {
+            const response = await fetch(`https://localhost:44365/api/Users/${userId}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
                 },
                 body: JSON.stringify(user)
             });
-            console.log('Dati dell\'utente aggiornati con successo');
+
+            if (!response.ok) {
+                throw new Error('Errore durante l\'aggiornamento dei dati dell\'utente');
+            }
+
+            setSuccessMessage('Dati dell\'utente aggiornati con successo');
         } catch (error) {
             console.error('Errore durante l\'aggiornamento dei dati dell\'utente:', error);
+            setErrorMessage('Si è verificato un errore durante l\'aggiornamento dei dati dell\'utente');
         }
     };
+    
 
     return (
         <Container>
             <h2>User Panel</h2>
+            {successMessage && <Alert variant="success">{successMessage}</Alert>}
+            {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
             <Form onSubmit={handleSubmit}>
 
                 <Form.Group controlId="email">
@@ -59,7 +74,7 @@ const UserPanel = () => {
 
                 <Form.Group controlId="password">
                     <Form.Label>Password:</Form.Label>
-                    <Form.Control type="password" name="password" value={user.password} onChange={handleChange} />
+                    <Form.Control type="password" name="password" placeholder='set your new password' value={user.password} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group controlId="birthDate">
