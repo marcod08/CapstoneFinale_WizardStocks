@@ -22,6 +22,7 @@ namespace WizardStocks.Models
         [Required]
         public string password { get; set; }
 
+        [Required]
         [Column(TypeName = "date")]
         public DateTime birthDate { get; set; }
 

@@ -15,6 +15,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using System.Web.UI.WebControls;
+using WizardStocks.Attributes;
 using WizardStocks.Models;
 
 namespace WizardStocks.Controllers
@@ -43,10 +44,12 @@ namespace WizardStocks.Controllers
             return Ok(user);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Users/5 - Modifica Utente (UserPanel)
+        [CustomAuthorize]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -56,6 +59,9 @@ namespace WizardStocks.Controllers
             {
                 return BadRequest();
             }
+
+
+            user.password = HashPassword(user.password);
 
             db.Entry(user).State = EntityState.Modified;
 
@@ -77,6 +83,7 @@ namespace WizardStocks.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+
 
         // POST: api/Users - Registrazione Utente
         [ResponseType(typeof(User))]
