@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -11,7 +12,8 @@ namespace WizardStocks
         {
             // abilita le richieste Cors
             config.EnableCors();
-
+            // serializzatore JSON per evitare errori dovuti ai riferimenti circolari durante la serializzazione degli oggetti
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             // Web API configuration and services
 
             // Web API routes

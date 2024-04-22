@@ -37,6 +37,21 @@ namespace WizardStocks.Controllers
             return Ok(fav);
         }
 
+        // GET: api/Favs/{userId} la get che utilizzo
+        [Route("api/Favs/{userId}")]
+        [ResponseType(typeof(IEnumerable<string>))]
+        public IHttpActionResult GetFavsByUserId(int userId)
+        {
+            var favs = db.Favs.Where(f => f.userId == userId).Select(f => f.cardId).ToList();
+            if (favs == null || favs.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(favs);
+        }
+
+
         // PUT: api/Favs/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutFav(int id, Fav fav)
@@ -72,7 +87,7 @@ namespace WizardStocks.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Favs
+        // POST: api/Favs Aggiunta preferiti
         [ResponseType(typeof(Fav))]
         public IHttpActionResult PostFav(Fav fav)
         {
@@ -87,20 +102,25 @@ namespace WizardStocks.Controllers
             return CreatedAtRoute("DefaultApi", new { id = fav.id }, fav);
         }
 
-        // DELETE: api/Favs/5
+        // DELETE: api/Favs Cancella preferiti
         [ResponseType(typeof(Fav))]
-        public IHttpActionResult DeleteFav(int id)
+        public IHttpActionResult DeleteFav(Fav fav)
         {
-            Fav fav = db.Favs.Find(id);
-            if (fav == null)
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var existingFav = db.Favs.FirstOrDefault(f => f.userId == fav.userId && f.cardId == fav.cardId);
+            if (existingFav == null)
             {
                 return NotFound();
             }
 
-            db.Favs.Remove(fav);
+            db.Favs.Remove(existingFav);
             db.SaveChanges();
 
-            return Ok(fav);
+            return Ok(existingFav);
         }
 
         protected override void Dispose(bool disposing)

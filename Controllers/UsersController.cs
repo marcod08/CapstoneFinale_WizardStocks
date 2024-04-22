@@ -31,7 +31,8 @@ namespace WizardStocks.Controllers
             return db.Users;
         }
 
-        // GET: api/Users/5
+        // GET: api/Users/5 - Get per recuperare gli utenti
+        [CustomAuthorize]
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {

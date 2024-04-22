@@ -9,7 +9,7 @@ namespace WizardStocks.Models
     public partial class Fav
     {
         public int id { get; set; }
-
+        [Required]
         public int userId { get; set; }
 
         [Required]
