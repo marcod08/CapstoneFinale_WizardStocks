@@ -47,6 +47,7 @@ const Details = () => {
                         throw new Error('Errore nella richiesta dei preferiti');
                     }
                     const favsData = await favsResponse.json();
+                    console.log(favsData);
                     setIsFavorite(favsData.includes(cardId));
                 } catch (error) {
                     setError('Si è verificato un errore durante il recupero dei preferiti.');
