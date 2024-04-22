@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using WizardStocks.Attributes;
 using WizardStocks.Models;
 
 namespace WizardStocks.Controllers
@@ -38,6 +39,7 @@ namespace WizardStocks.Controllers
         }
 
         // GET: api/Favs/{userId} la get che utilizzo
+        [CustomAuthorize]
         [Route("api/Favs/{userId}")]
         [ResponseType(typeof(IEnumerable<string>))]
         public IHttpActionResult GetFavsByUserId(int userId)
@@ -88,6 +90,7 @@ namespace WizardStocks.Controllers
         }
 
         // POST: api/Favs Aggiunta preferiti
+        [CustomAuthorize]
         [ResponseType(typeof(Fav))]
         public IHttpActionResult PostFav(Fav fav)
         {
@@ -103,6 +106,7 @@ namespace WizardStocks.Controllers
         }
 
         // DELETE: api/Favs Cancella preferiti
+        [CustomAuthorize]
         [ResponseType(typeof(Fav))]
         public IHttpActionResult DeleteFav(Fav fav)
         {
