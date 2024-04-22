@@ -17,18 +17,23 @@ const UserPanel = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await fetch(`https://localhost:44365/api/Users/${userId}`);
+                const response = await fetch(`https://localhost:44365/api/Users/${userId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                });
                 const userData = await response.json();
-                const birthDate = userData.birthDate.substring(0, 10); // qui taglio la data per poter popolare l'input field con un valore compatibile
+                const birthDate = userData.birthDate.substring(0, 10);
                 
                 setUser({ ...userData, birthDate });
             } catch (error) {
                 console.error('Errore durante il recupero dei dati dell\'utente:', error);
             }
         };
-
+    
         fetchUser();
     }, [userId, accessToken]);
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;

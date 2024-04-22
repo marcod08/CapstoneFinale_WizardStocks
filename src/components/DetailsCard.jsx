@@ -1,12 +1,10 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
-const DetailsCard = ({ card }) => {
+const DetailsCard = ({ card, isFavorite, toggleFavorite }) => {
     return (
-
         <Container>
             <Row>
-
                 <Col>
                     {(card.image_uris && card.image_uris.large) || (card.card_faces && card.card_faces[0]) ? (
                         <img
@@ -22,7 +20,7 @@ const DetailsCard = ({ card }) => {
                 </Col>
 
                 <Col className='d-flex flex-column justify-content-center'>
-                    <div className='d-flex flex-column align-items-center '>
+                    <div className='d-flex flex-column align-items-center'>
                         <h2>{card.name}</h2>
                         <p>{card.type_line}</p>
                         <p>{card.oracle_text}</p>
@@ -46,11 +44,22 @@ const DetailsCard = ({ card }) => {
                                 </tr>
                             </tbody>
                         </table>
+
+                        {!isFavorite && (
+                            <Button variant="success" onClick={toggleFavorite}>
+                                Aggiungi ai preferiti
+                            </Button>
+                        )}
+
+                        {isFavorite && (
+                            <Button variant="danger" onClick={toggleFavorite}>
+                                Rimuovi dai preferiti
+                            </Button>
+                        )}
                     </div>
                 </Col>
             </Row>
         </Container>
-
     );
 }
 
