@@ -10,8 +10,10 @@ const Details = () => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const accessToken = localStorage.getItem('accessToken');
 
     useEffect(() => {
+        // Qui fetcho la carta da scryfall
         const fetchCard = async () => {
             try {
                 const response = await fetch(`https://api.scryfall.com/cards/${cardId}`);
@@ -30,12 +32,17 @@ const Details = () => {
         fetchCard();
     }, [cardId]);
 
+    // Qui fetcho sulle mie API per verificare se la carta è nei preferiti dell'utente
     useEffect(() => {
         const userId = localStorage.getItem('userId');
         if (userId) {
             const fetchFavorites = async () => {
                 try {
-                    const favsResponse = await fetch(`https://localhost:44365/api/favs/${userId}`);
+                    const favsResponse = await fetch(`https://localhost:44365/api/favs/${userId}`, {
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`
+                        }
+                    });
                     if (!favsResponse.ok) {
                         throw new Error('Errore nella richiesta dei preferiti');
                     }
@@ -48,14 +55,18 @@ const Details = () => {
 
             fetchFavorites();
         }
-    }, [cardId]);
+    }, [cardId, accessToken]);
 
+    // useCallback per evitare il reinstanziamento per le funzioni di aggiunta/rimozione preferiti
     const toggleFavorite = useCallback(async () => {
         const userId = localStorage.getItem('userId');
         try {
             const response = await fetch(`https://localhost:44365/api/favs`, {
                 method: isFavorite ? 'DELETE' : 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                },
                 body: JSON.stringify({ userId: userId, cardId: cardId })
             });
             if (!response.ok) {
@@ -65,7 +76,7 @@ const Details = () => {
         } catch (error) {
             setError('Si è verificato un errore durante l\'aggiunta o la rimozione dai preferiti.');
         }
-    }, [isFavorite, cardId]);
+    }, [isFavorite, cardId, accessToken]);
 
     return (
         <Container>
