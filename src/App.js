@@ -10,6 +10,7 @@ import Registration from './pages/Registration';
 import UserPanel from './pages/UserPanel';
 import Footer from './components/Footer';
 import NotFound from './pages/NotFound';
+import Stocks from './pages/Stocks';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/registration' element={<Registration />} />
           <Route path='/panel' element={<UserPanel />} />
           <Route path='*' element={<NotFound />} />
+          <Route path='/stocks' element={<Stocks />}></Route>
         </Routes>
         <Footer />
       </div>

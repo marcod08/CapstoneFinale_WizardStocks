@@ -1,37 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Pagination } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Container, Pagination } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SearchBar from "../components/SearchBar";
 import MainCard from "../components/MainCard";
-import TopPricedCardsTable from "../components/TopPricedCardsTable";
+
 
 const Home = () => {
     const [searchResults, setSearchResults] = useState([]);
-    const [topPricedCardsUSD, setTopPricedCardsUSD] = useState([]);
-    const [topPricedCardsEUR, setTopPricedCardsEUR] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [cardsPerPage] = useState(3);
-
-    // Qui fetcho le 10 carte piu costose
-    useEffect(() => {
-        const fetchTopPricedCards = async () => {
-            try {
-                const response = await fetch("https://api.scryfall.com/cards/search?q=is%3Areserved");
-                if (!response.ok) {
-                    throw new Error('Errore nella ricerca delle carte più costose.');
-                }
-                const data = await response.json();
-                const top10USD = data.data.sort((a, b) => b.prices.usd - a.prices.usd).slice(0, 10);
-                const top10EUR = data.data.sort((a, b) => b.prices.eur - a.prices.eur).slice(0, 10);
-                setTopPricedCardsUSD(top10USD);
-                setTopPricedCardsEUR(top10EUR);
-            } catch (error) {
-                console.error('Errore nella ricerca delle carte più costose:', error);
-            }
-        };
-
-        fetchTopPricedCards();
-    }, []);
 
     // Qui fetcho la carta ricercata
     const handleSearch = async (query) => {
@@ -59,16 +36,6 @@ const Home = () => {
 
             {/* Searchbar */}
             <SearchBar handleSearch={handleSearch} />
-
-            {/* Blocco che genera le tabelle */}
-            {searchResults.length === 0 && (
-                <Container>
-                    <Row>
-                        <Col><TopPricedCardsTable title="Top expensive cards in NA today" topPricedCards={topPricedCardsUSD} /></Col>
-                        <Col><TopPricedCardsTable title="Top expensive cards in EU today" topPricedCards={topPricedCardsEUR} /></Col>
-                    </Row>
-                </Container>
-            )}
 
             {/* Blocco che genera le cards cercate */}
             <div className="row">
