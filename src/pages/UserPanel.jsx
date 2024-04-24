@@ -5,15 +5,16 @@ const UserPanel = () => {
     const userId = localStorage.getItem('userId');
     const [user, setUser] = useState({
         email: '',
-        password: '',
         birthDate: '',
         gender: ''
     });
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [successMessage, setSuccessMessage] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
     const accessToken = localStorage.getItem('accessToken');
 
-    // Qua fetcho i valori dell'utente dalle mie api
+    // Fetch dei valori dell'utente dalle API
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -37,12 +38,26 @@ const UserPanel = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUser({ ...user, [name]: value });
+        if (name === 'password') {
+            setPassword(value);
+        } else if (name === 'confirmPassword') {
+            setConfirmPassword(value);
+        } else {
+            setUser({ ...user, [name]: value });
+        }
     };
 
-    // Qui fetcho per la modifica dei campi
+    // Fetch per la modifica dei dati utenti
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!password) {
+            setErrorMessage('La password è obbligatoria');
+            return;
+        }
+        if (password !== confirmPassword) {
+            setErrorMessage('La password e la conferma della password non corrispondono');
+            return;
+        }
         try {
             const response = await fetch(`https://localhost:44365/api/Users/${userId}`, {
                 method: 'PUT',
@@ -50,7 +65,7 @@ const UserPanel = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${accessToken}`
                 },
-                body: JSON.stringify(user)
+                body: JSON.stringify({ ...user, password })
             });
 
             if (!response.ok) {
@@ -79,7 +94,12 @@ const UserPanel = () => {
 
                 <Form.Group controlId="password">
                     <Form.Label>Password:</Form.Label>
-                    <Form.Control type="password" name="password" placeholder='set your new password' value={user.password} onChange={handleChange} />
+                    <Form.Control type="password" name="password" placeholder='set your new password' value={password} onChange={handleChange} />
+                </Form.Group>
+
+                <Form.Group controlId="confirmPassword">
+                    <Form.Label>Confirm Password:</Form.Label>
+                    <Form.Control type="password" name="confirmPassword" placeholder='confirm your new password' value={confirmPassword} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group controlId="birthDate">
