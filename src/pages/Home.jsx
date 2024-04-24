@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Pagination } from 'react-bootstrap';
+import { Container, Pagination, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SearchBar from "../components/SearchBar";
 import MainCard from "../components/MainCard";
@@ -9,23 +9,30 @@ const Home = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [cardsPerPage] = useState(3);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    // Qui fetcho la carta ricercata
+    // Fetch del searchbar
     const handleSearch = async (query) => {
         try {
             const response = await fetch(`https://api.scryfall.com/cards/search?q=${query}`);
             if (!response.ok) {
-                throw new Error('Errore nella ricerca.');
+                throw new Error('Error in search.');
             }
             const data = await response.json();
             setSearchResults(data.data);
+            setErrorMessage('');
         } catch (error) {
-            console.error('Errore nella ricerca:', error);
+            console.error('Error in search:', error);
             setSearchResults([]);
+            if (error.message === 'Error in search.') {
+                setErrorMessage('No results found.');
+            } else {
+                setErrorMessage('An error occurred during the search.');
+            }
         }
     };
 
-    // funzioni e variabili per la pagination
+    // Funzioni e variabili per la paginazione
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const indexOfLastCard = currentPage * cardsPerPage;
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -33,11 +40,9 @@ const Home = () => {
 
     return (
         <Container>
-
-            {/* Searchbar */}
             <SearchBar handleSearch={handleSearch} />
+            {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
 
-            {/* Blocco che genera le cards cercate */}
             <div className="row">
                 {currentCards.map(card => (
                     <div className="col-md-4" key={card.id}>
@@ -48,7 +53,7 @@ const Home = () => {
                 ))}
             </div>
 
-            {/* Pagination dei risultati */}
+            {/* Pagination */}
             {searchResults.length > 0 && (
                 <div className="d-flex justify-content-center">
                     <Pagination>

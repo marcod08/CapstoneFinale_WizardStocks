@@ -6,7 +6,7 @@ function TopPricedCardTable({ top10PricedCards, handleResetFilter, handleFilter 
     return (
         <div>
             <ButtonGroup>
-                <Button onClick={handleResetFilter}>Tutti i formati</Button>
+                <Button onClick={handleResetFilter}>All formats</Button>
                 <Button onClick={() => handleFilter('vintage')}>Vintage</Button>
                 <Button onClick={() => handleFilter('oldschool')}>OldSchool</Button> 
                 <Button onClick={() => handleFilter('legacy')}>Legacy</Button>

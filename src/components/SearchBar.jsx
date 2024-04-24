@@ -8,17 +8,17 @@ const SearchBar = ({ handleSearch }) => {
     const handleChange = async (e) => {
         setSearchQuery(e.target.value);
 
-        // Qui fetcho per il menu a tendina
+        // Fetch per il menu a tendina
         if (e.target.value.length >= 3) {
             try {
                 const response = await fetch(`https://api.scryfall.com/cards/search?q=${e.target.value}`);
                 if (!response.ok) {
-                    throw new Error('Errore nella ricerca.');
+                    throw new Error('Error in search.');
                 }
                 const data = await response.json();
                 setSearchResults(data.data.slice(0, 5));
             } catch (error) {
-                console.error('Errore nella ricerca:', error);
+                console.error('Error in search:', error);
                 setSearchResults([]);
             }
         } else {

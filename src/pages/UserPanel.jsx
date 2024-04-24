@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Form, Button, Col, Alert } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const UserPanel = () => {
     const userId = localStorage.getItem('userId');
@@ -14,7 +15,7 @@ const UserPanel = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const accessToken = localStorage.getItem('accessToken');
 
-    // Fetch dei valori dell'utente dalle API
+    // Fetch dei dati dalle mie Api
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -25,16 +26,16 @@ const UserPanel = () => {
                 });
                 const userData = await response.json();
                 const birthDate = userData.birthDate.substring(0, 10);
-                
+
                 setUser({ ...userData, birthDate });
             } catch (error) {
-                console.error('Errore durante il recupero dei dati dell\'utente:', error);
+                console.error('Error fetching user data:', error);
             }
         };
-    
+
         fetchUser();
     }, [userId, accessToken]);
-    
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -47,15 +48,15 @@ const UserPanel = () => {
         }
     };
 
-    // Fetch per la modifica dei dati utenti
+    // Fetch per modificare i dati utente
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!password) {
-            setErrorMessage('La password è obbligatoria');
+            setErrorMessage('Password is required');
             return;
         }
         if (password !== confirmPassword) {
-            setErrorMessage('La password e la conferma della password non corrispondono');
+            setErrorMessage('Password and confirm password do not match');
             return;
         }
         try {
@@ -69,16 +70,16 @@ const UserPanel = () => {
             });
 
             if (!response.ok) {
-                throw new Error('Errore durante l\'aggiornamento dei dati dell\'utente');
+                throw new Error('Error updating user data');
             }
 
-            setSuccessMessage('Dati dell\'utente aggiornati con successo');
+            setSuccessMessage('User data updated successfully');
         } catch (error) {
-            console.error('Errore durante l\'aggiornamento dei dati dell\'utente:', error);
-            setErrorMessage('Si è verificato un errore durante l\'aggiornamento dei dati dell\'utente');
+            console.error('Error updating user data:', error);
+            setErrorMessage('An error occurred while updating user data');
         }
     };
-    
+
 
     return (
         <Container>
@@ -88,27 +89,27 @@ const UserPanel = () => {
             <Form onSubmit={handleSubmit}>
 
                 <Form.Group controlId="email">
-                    <Form.Label>Email:</Form.Label>
+                    <Form.Label> Edit Email:</Form.Label>
                     <Form.Control type="email" name="email" value={user.email} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group controlId="password">
-                    <Form.Label>Password:</Form.Label>
+                    <Form.Label>New Password:</Form.Label>
                     <Form.Control type="password" name="password" placeholder='set your new password' value={password} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group controlId="confirmPassword">
-                    <Form.Label>Confirm Password:</Form.Label>
+                    <Form.Label>Confirm new Password:</Form.Label>
                     <Form.Control type="password" name="confirmPassword" placeholder='confirm your new password' value={confirmPassword} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group controlId="birthDate">
-                    <Form.Label>Birth Date:</Form.Label>
+                    <Form.Label>Edit Birth Date:</Form.Label>
                     <Form.Control type="date" name="birthDate" value={user.birthDate} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group controlId="gender">
-                    <Form.Label>Gender:</Form.Label>
+                    <Form.Label>Edit Gender:</Form.Label>
                     <div>
                         <Form.Check
                             inline
@@ -139,8 +140,12 @@ const UserPanel = () => {
                         />
                     </div>
                 </Form.Group>
-                
+
                 <Button variant="primary" type="submit">Save</Button>
+                <Link to={{ pathname: `/` }}>
+                    <Button variant="secondary">Go to Home</Button>
+                </Link>
+
             </Form>
         </Container>
     );

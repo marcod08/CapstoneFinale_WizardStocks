@@ -9,13 +9,13 @@ const Registration = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [gender, setGender] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setErrorMessage("Passwords do not match");
       return;
     }
 
@@ -38,14 +38,14 @@ const Registration = () => {
         throw new Error(errorData.message || 'Registration failed');
       }
 
-      setSuccess(true);
+      setSuccessMessage(true);
 
       setTimeout(() => {
         navigate('/auth');
-      }, 3000);
+      }, 1500);
 
     } catch (error) {
-      setError(error.message);
+      setErrorMessage(error.message);
     }
   };
 
@@ -53,8 +53,8 @@ const Registration = () => {
     <Container>
       <h2>Registration</h2>
 
-      {error && <Alert variant="danger">{error}</Alert>}
-      {success && <Alert variant="success">Registration successful. Redirecting to login page...</Alert>}
+      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+      {successMessage && <Alert variant="success">Registration successful. Redirecting to login page...</Alert>}
       <Form onSubmit={handleSubmit}>
 
         <Form.Group controlId="formBasicEmail">

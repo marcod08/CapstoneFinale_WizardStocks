@@ -9,7 +9,8 @@ const Auth = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [alertMessage, setAlertMessage] = useState(null); 
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,26 +24,34 @@ const Auth = () => {
       });
 
       if (response.ok) {
-        const data = await response.json(); 
+        const data = await response.json();
         const { accessToken, userId } = data;
 
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('userId', userId);
 
-        navigate('/');
+        setSuccessMessage('Login successful!');
+        setErrorMessage(null);
+
+        setTimeout(() => {
+          navigate('/');
+        }, 1500);
       } else {
-        setAlertMessage('Invalid email or password. Please try again.');
+        setErrorMessage('Invalid email or password. Please try again.');
+        setSuccessMessage(null);
       }
     } catch (error) {
-      console.error('Errore durante il login:', error);
-      setAlertMessage('An error occurred while logging in. Please try again later.'); 
+      console.error('Error during login:', error);
+      setErrorMessage('An error occurred while logging in. Please try again later.');
+      setSuccessMessage(null);
     }
   };
 
   return (
     <Container>
       <h2>Login</h2>
-      {alertMessage && <Alert variant="danger">{alertMessage}</Alert>} 
+      {successMessage && <Alert variant="success">{successMessage}</Alert>}
+      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="email">
           <Form.Label>Email</Form.Label>

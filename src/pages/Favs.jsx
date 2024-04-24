@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MainCard from '../components/MainCard';
 import { Link } from 'react-router-dom';
-import { Container, Pagination } from 'react-bootstrap';
+import { Container, Pagination, Alert } from 'react-bootstrap';
 
 const Favs = () => {
   const userId = localStorage.getItem('userId');
@@ -9,6 +9,7 @@ const Favs = () => {
   const [favoriteCards, setFavoriteCards] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(3);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -20,7 +21,7 @@ const Favs = () => {
             }
           });
           if (!response.ok) {
-            throw new Error('Errore nella richiesta dei preferiti');
+            throw new Error('Error fetching favorites');
           }
           const data = await response.json();
 
@@ -29,7 +30,7 @@ const Favs = () => {
           for (const cardId of data) {
             const cardResponse = await fetch(`https://api.scryfall.com/cards/${cardId}`);
             if (!cardResponse.ok) {
-              throw new Error('Errore nella richiesta dei dettagli della carta');
+              throw new Error('Error fetching card details');
             }
             const cardData = await cardResponse.json();
             fetchedCards.push(cardData);
@@ -38,14 +39,15 @@ const Favs = () => {
           setFavoriteCards(fetchedCards);
         }
       } catch (error) {
-        console.error('Si è verificato un errore durante il recupero dei preferiti:', error);
+        console.error('An error occurred while fetching favorites:', error);
+        setErrorMessage('An error occurred while fetching favorites');
       }
     };
 
     fetchFavorites();
   }, [userId, accessToken]);
 
-  // funzioni e variabili per la pagination
+  // Funzioni e variabili per la paginazione
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -54,8 +56,8 @@ const Favs = () => {
   return (
     <Container>
       <h2>Favorite Cards</h2>
+      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
 
-      {/* Blocco che genera le cards favorite */}
       <div className='row'>
         {currentCards.map(card => (
           <div className="col-md-4" key={card.id}>
@@ -66,7 +68,7 @@ const Favs = () => {
         ))}
       </div>
 
-      {/* Pagination dei risultati */}
+      {/* Pagination */}
       <div className="d-flex justify-content-center">
         <Pagination>
           {currentPage > 1 && (

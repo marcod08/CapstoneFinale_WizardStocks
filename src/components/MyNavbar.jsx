@@ -21,7 +21,10 @@ function MyNavbar() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand as={Link} to="/"><img src={Logo} alt="logo" style={{ width: '3em', height: 'auto' }} /></Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          <img src={Logo} alt="logo" className='rounded-circle' style={{ width: '2.5em', height: 'auto' }} />
+        </Navbar.Brand>
+        <Nav.Link className='fw-bold fs-6' as={Link} to="/">WizardStocks</Nav.Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

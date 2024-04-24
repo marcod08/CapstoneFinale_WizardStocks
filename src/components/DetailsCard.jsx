@@ -6,17 +6,11 @@ const DetailsCard = ({ card, isFavorite, toggleFavorite }) => {
         <Container>
             <Row>
                 <Col>
-                    {(card.image_uris && card.image_uris.large) || (card.card_faces && card.card_faces[0]) ? (
-                        <img
-                            className="img-fluid"
-                            src={(card.image_uris && card.image_uris.large) || (card.card_faces && card.card_faces[0].image_uris.large)}
-                            alt={card.name}
-                        />
-                    ) : (
-                        <div className="no-image-available">
-                            <span>Immagine non disponibile</span>
-                        </div>
-                    )}
+                    <img
+                        className="img-fluid"
+                        src={(card.image_uris && card.image_uris.large) || (card.card_faces && card.card_faces[0].image_uris.large)}
+                        alt={card.name}
+                    />
                 </Col>
 
                 <Col className='d-flex flex-column justify-content-center'>
