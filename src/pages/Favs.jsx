@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import MainCard from '../components/MainCard';
 import { Link } from 'react-router-dom';
-import { Container, Pagination, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Pagination, Alert } from 'react-bootstrap';
 
 const Favs = () => {
   const userId = localStorage.getItem('userId');
   const accessToken = localStorage.getItem('accessToken');
   const [favoriteCards, setFavoriteCards] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage] = useState(3);
+  const [cardsPerPage] = useState(8);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
@@ -55,22 +55,22 @@ const Favs = () => {
 
   return (
     <Container>
-      <h2>Favorite Cards</h2>
+      <h2 className='mt-3'>Favorite Cards</h2>
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
 
-      <div className='row'>
+      <Row>
         {currentCards.map(card => (
-          <div className="col-md-4" key={card.id}>
+          <Col md={3} key={card.id}>
             <Link to={{ pathname: `/details/${card.id}` }}>
               <MainCard card={card} />
             </Link>
-          </div>
+          </Col>
         ))}
-      </div>
+      </Row>
 
       {/* Pagination */}
-      <div className="d-flex justify-content-center">
-        <Pagination>
+      <div className="d-flex justify-content-center mt-3">
+        <Pagination className='mb-0'>
           {currentPage > 1 && (
             <>
               <Pagination.First onClick={() => paginate(1)} disabled={currentPage === 1} />

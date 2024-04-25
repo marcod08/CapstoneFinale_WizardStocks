@@ -31,7 +31,7 @@ function MyNavbar() {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/stocks">Stocks</Nav.Link>
             {isLoggedIn &&
-              <Nav.Link as={Link} to="/favs">Favourite Cards</Nav.Link>
+              <Nav.Link as={Link} to="/favs">Favorites</Nav.Link>
             }
           </Nav>
           <Nav className="ml-auto">
@@ -41,7 +41,10 @@ function MyNavbar() {
                 <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <Nav.Link as={Link} to="/auth">Login</Nav.Link>
+              <>
+                <Nav.Link as={Link} to="/auth">Login</Nav.Link>
+                <Nav.Link as={Link} to="/registration">Register</Nav.Link>
+              </>
             )}
           </Nav>
         </Navbar.Collapse>

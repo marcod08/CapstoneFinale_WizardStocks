@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
+import { BsSearch } from 'react-icons/bs';
 
 const SearchBar = ({ handleSearch }) => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -34,31 +35,34 @@ const SearchBar = ({ handleSearch }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setSearchResults([]);
         handleSearch(searchQuery);
     };
 
     return (
-        <div>
+        <>
             <Form onSubmit={handleSubmit} className='d-flex'>
                 <FormControl
                     type="text"
-                    placeholder="Cerca"
-                    className="mr-sm-2"
+                    placeholder="Search"
+                    className="mr-sm-2 text-center"
                     value={searchQuery}
                     onChange={handleChange}
                 />
-                <Button type="submit" variant="outline-success">Search</Button>
+                <Button className='ms-2' type="submit" variant="outline-success">
+                    <BsSearch />
+                </Button>
             </Form>
             {searchResults.length > 0 && (
                 <div>
                     {searchResults.map((card) => (
-                        <div key={card.id} onClick={() => handleItemClick(card.name)}>
+                        <p className='mt-1 mb-1 me-5' key={card.id} onClick={() => handleItemClick(card.name)}>
                             {card.name}
-                        </div>
+                        </p>
                     ))}
                 </div>
             )}
-        </div>
+        </>
     );
 };
 

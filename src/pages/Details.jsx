@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Container from 'react-bootstrap/Container';
+import { Container, Row, Col, Alert } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import DetailsCard from "../components/DetailsCard";
-import { Alert } from "react-bootstrap";
+
 
 const Details = () => {
     const { cardId } = useParams();
@@ -77,16 +77,19 @@ const Details = () => {
     }, [isFavorite, cardId, accessToken]);
 
     return (
-        <Container>
+        <Container className="mt-3">
             {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
             {successMessage && <Alert variant="success">{successMessage}</Alert>}
             {card && (
                 <div className="d-flex justify-content-center">
+                    <Col md={7}>
                     <DetailsCard 
                         card={card} 
                         isFavorite={isFavorite} 
                         toggleFavorite={toggleFavorite} 
                     />
+                    </Col>
+                    
                 </div>
             )}
         </Container>

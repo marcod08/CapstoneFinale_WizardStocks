@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Alert from 'react-bootstrap/Alert';
+import { Container, Form, Button, Col, Alert } from 'react-bootstrap';
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -49,36 +46,45 @@ const Auth = () => {
 
   return (
     <Container>
-      <h2>Login</h2>
+      <h2 className='mt-3 mb-0'>Login</h2>
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control 
-            type="email" 
-            placeholder="Enter email" 
-            required 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control 
-            type="password" 
-            placeholder="Password" 
-            required 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Login
-        </Button>
+      <div className="d-flex justify-content-center mt-3">
+        <Col md={3}>
+          <Form onSubmit={handleSubmit}>
 
-        <Link to="/registration"><p>Don't have an account? Sign up here.</p></Link>
-      </Form>
+            <Form.Group controlId="email">
+              <Form.Label>Email:</Form.Label>
+              <Form.Control
+                className='text-center'
+                type="email"
+                placeholder="Enter your email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="password">
+              <Form.Label className='mt-2'>Password:</Form.Label>
+              <Form.Control
+                className='text-center'
+                type="password"
+                placeholder="Enter your password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+
+            <Button className='mt-3' variant="primary" type="submit">
+              Login
+            </Button>
+
+            <Link to="/registration"><p className='mt-2'>Don't have an account? Sign up here.</p></Link>
+          </Form>
+        </Col>
+      </div>
     </Container>
   );
 };

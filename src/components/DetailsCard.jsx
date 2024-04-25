@@ -2,10 +2,13 @@ import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
 const DetailsCard = ({ card, isFavorite, toggleFavorite }) => {
+
+    const isLoggedIn = localStorage.getItem('accessToken') && localStorage.getItem('userId');
+
     return (
-        <Container>
+        <div>
             <Row>
-                <Col>
+                <Col md={5}>
                     <img
                         className="img-fluid"
                         src={(card.image_uris && card.image_uris.large) || (card.card_faces && card.card_faces[0].image_uris.large)}
@@ -13,7 +16,7 @@ const DetailsCard = ({ card, isFavorite, toggleFavorite }) => {
                     />
                 </Col>
 
-                <Col className='d-flex flex-column justify-content-center'>
+                <Col md={7} className='d-flex flex-column justify-content-center'>
                     <div className='d-flex flex-column align-items-center'>
                         <h2>{card.name}</h2>
                         <p>{card.type_line}</p>
@@ -22,9 +25,9 @@ const DetailsCard = ({ card, isFavorite, toggleFavorite }) => {
                             <thead>
                                 <tr>
                                     <th>USD</th>
-                                    <th>USD (Foil)</th>
+                                    <th>Foil</th>
                                     <th>EUR</th>
-                                    <th>EUR (Foil)</th>
+                                    <th>Foil</th>
                                     <th>TIX</th>
                                 </tr>
                             </thead>
@@ -39,13 +42,13 @@ const DetailsCard = ({ card, isFavorite, toggleFavorite }) => {
                             </tbody>
                         </table>
 
-                        {!isFavorite && (
+                        {isLoggedIn && !isFavorite && (
                             <Button variant="success" onClick={toggleFavorite}>
                                 Aggiungi ai preferiti
                             </Button>
                         )}
 
-                        {isFavorite && (
+                        {isLoggedIn && isFavorite && (
                             <Button variant="danger" onClick={toggleFavorite}>
                                 Rimuovi dai preferiti
                             </Button>
@@ -53,7 +56,7 @@ const DetailsCard = ({ card, isFavorite, toggleFavorite }) => {
                     </div>
                 </Col>
             </Row>
-        </Container>
+        </div>
     );
 }
 

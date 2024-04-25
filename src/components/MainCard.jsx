@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 
 const MainCard = ({ card }) => {
     return (
-        <Card>
+        <Card className='mt-3'>
             {/* le carte double face non possiedono image_uris ma card_faces (0 è il davanti l'1 è il dietro) */}
             {((card.image_uris && card.image_uris.large) || (card.card_faces && card.card_faces[0])) && (
                 <Card.Img
@@ -12,12 +12,6 @@ const MainCard = ({ card }) => {
                     alt={card.name}
                 />
             )}
-            <Card.Body>
-                <Card.Title>{card.name}</Card.Title>
-                <Card.Text>
-                    {card.type_line}
-                </Card.Text>
-            </Card.Body>
         </Card>
     );
 }

@@ -49,7 +49,7 @@ function Stocks() {
     return (
         <Container>
             {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-            <h2>Top expensive cards today</h2>
+            <h2 className='mt-3 mb-0'>Top expensive cards of the day</h2>
             <TopPricedCardTable
                 top10PricedCards={top10PricedCards}
                 handleResetFilter={handleResetFilter}
