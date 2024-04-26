@@ -83,7 +83,7 @@ const Details = () => {
             {successMessage && <Alert variant="success">{successMessage}</Alert>}
             {card && (
                 <div className="d-flex justify-content-center">
-                    <Col md={9}>
+                    <Col md={12}>
                     <DetailsCard 
                         card={card} 
                         isFavorite={isFavorite} 

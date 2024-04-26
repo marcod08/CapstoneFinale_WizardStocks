@@ -8,9 +8,9 @@ const DetailsCard = ({ card, isFavorite, toggleFavorite }) => {
     return (
         <div>
             <Row>
-                <Col md={5}>
+                <Col md={5} className='rounded-custom'>
                     <img
-                        className="img-fluid"
+                        className='img-fluid rounded-custom'
                         src={(card.image_uris && card.image_uris.large) || (card.card_faces && card.card_faces[0].image_uris.large)}
                         alt={card.name}
                     />
@@ -43,14 +43,14 @@ const DetailsCard = ({ card, isFavorite, toggleFavorite }) => {
                         </table>
 
                         {isLoggedIn && !isFavorite && (
-                            <Button variant="success" onClick={toggleFavorite}>
-                                Aggiungi ai preferiti
+                            <Button variant="primary" onClick={toggleFavorite}>
+                                Add to favorites
                             </Button>
                         )}
 
                         {isLoggedIn && isFavorite && (
                             <Button variant="danger" onClick={toggleFavorite}>
-                                Rimuovi dai preferiti
+                                Remove from favorites
                             </Button>
                         )}
                     </div>

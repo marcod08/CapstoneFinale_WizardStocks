@@ -52,7 +52,7 @@ const Registration = () => {
 
   return (
     <Container className="d-flex justify-content-center">
-      <div className="col-md-3 blurred-box">
+      <div className="col-md-4 blurred-box">
         <h2 className='mb-0'>Registration</h2>
 
         {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
@@ -141,7 +141,7 @@ const Registration = () => {
 
           <Button className='mt-3 me-2' variant="primary" type="submit">Register</Button>
           <Link to={{ pathname: `/` }}>
-            <Button className='mt-3' variant="secondary">Go to Home</Button>
+            <Button className='mt-3' variant="danger">Go to Home</Button>
           </Link>
         </Form>
       </div>

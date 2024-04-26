@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+@import url('https://fonts.cdnfonts.com/css/magicmedieval');
+
 .App {
   text-align: center;
   color: #ebf7ff;
@@ -7,9 +10,52 @@
   color: #61dafb;
 }
 
+/* box con sfondo sfucoato */
 .blurred-box {
   backdrop-filter: blur(15px);
   padding: 1.5em;
   margin-top: 1.5em;
   border-radius: 15px;
+}
+
+body {
+  font-family: "MedievalSharp", cursive !important; 
+}
+
+/* Sovrascritture di alcuni elementi di bootstrap */
+.btn-primary, .alert-success {
+  background-color: #52C4FB !important; 
+  border-color: #52C4FB !important; 
+}
+
+.btn-primary:hover {
+  background-color: #4568C7 !important; 
+  border-color: #4568C7 !important; 
+}
+
+.btn-danger, .alert-danger {
+  background-color: #B25736 !important; 
+  border-color: #B25736 !important; 
+}
+
+.btn-danger:hover {
+  background-color: #834848 !important; 
+  border-color: #834848 !important; 
+}
+
+.navbar-custom {
+  backdrop-filter: blur(15px); 
+}
+
+a {
+  color: #4568C7 !important;
+  text-decoration: none !important;
+}
+
+a.nav-link {
+  color: #ebf7ff !important;
+}
+
+.rounded-custom {
+  border-radius: 0.8em !important;
 }

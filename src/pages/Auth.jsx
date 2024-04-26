@@ -46,10 +46,10 @@ const Auth = () => {
 
   return (
     <Container className="d-flex justify-content-center">
-      <div className="col-md-3 blurred-box">
+      <div className="col-md-4 blurred-box">
       <h2 className='mb-0'>Login</h2>
-      {successMessage && <Alert variant="success">{successMessage}</Alert>}
-      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+      {successMessage && <Alert className='my-2' variant="success">{successMessage}</Alert>}
+      {errorMessage && <Alert className='my-2' variant="danger">{errorMessage}</Alert>}
           <Form className='mt-3' onSubmit={handleSubmit}>
 
             <Form.Group controlId="email">
@@ -80,7 +80,7 @@ const Auth = () => {
               Login
             </Button>
 
-            <Link to="/registration"><p className='mt-2'>Don't have an account? Sign up here.</p></Link>
+            <Link to="/registration"><p className='mt-2 text-light'>Don't have an account? Sign up here.</p></Link>
           </Form>
       </div>
     </Container>

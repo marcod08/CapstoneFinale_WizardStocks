@@ -47,13 +47,13 @@ const Home = () => {
                 {currentCards.length === 0 && !errorMessage && (
                     <>
                         <h1 className=""> <strong>WizardStock</strong> </h1>
-                        <p className="fw-light fs-4 mb-3">is a search tool for "Magic: The Gathering" cards that helps you invest in them</p>
+                        <p className="fw-light fs-4">is a search tool for "Magic: The Gathering" cards that helps you invest in them</p>
                         {/*<img src={Logo} alt="logo" className="mt-2 rounded-circle " style={{ width: '15%' }} ></img> */}
                     </>
                 )}
 
 
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center mt-3">
                     <Col md={6}>
                         <SearchBar handleSearch={handleSearch} className='col-md-6' />
                     </Col>
@@ -75,16 +75,16 @@ const Home = () => {
                         <Pagination className="mb-0">
                             {currentPage > 1 && (
                                 <>
-                                    <Pagination.First onClick={() => paginate(1)} disabled={currentPage === 1} />
-                                    <Pagination.Prev onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} />
+                                    <Pagination.First className="pagination-custom" onClick={() => paginate(1)} disabled={currentPage === 1} />
+                                    <Pagination.Prev className="pagination-custom" onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} />
                                 </>
                             )}
                             {currentPage > 1 && (
-                                <Pagination.Item onClick={() => paginate(currentPage - 1)}>
+                                <Pagination.Item className="pagination-custom" onClick={() => paginate(currentPage - 1)}>
                                     {currentPage - 1}
                                 </Pagination.Item>
                             )}
-                            <Pagination.Item active>{currentPage}</Pagination.Item>
+                            <Pagination.Item className="pagination-custom" active>{currentPage}</Pagination.Item>
                             {currentPage < Math.ceil(searchResults.length / cardsPerPage) && (
                                 <Pagination.Item onClick={() => paginate(currentPage + 1)}>
                                     {currentPage + 1}
@@ -93,10 +93,11 @@ const Home = () => {
                             {currentPage < Math.ceil(searchResults.length / cardsPerPage) && (
                                 <>
                                     <Pagination.Next
+                                    className="pagination-custom"
                                         onClick={() => paginate(currentPage + 1)}
                                         disabled={currentPage === Math.ceil(searchResults.length / cardsPerPage)}
                                     />
-                                    <Pagination.Last onClick={() => paginate(Math.ceil(searchResults.length / cardsPerPage))} />
+                                    <Pagination.Last className="pagination-custom" onClick={() => paginate(Math.ceil(searchResults.length / cardsPerPage))} />
                                 </>
                             )}
                         </Pagination>

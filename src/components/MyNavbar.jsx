@@ -19,7 +19,7 @@ function MyNavbar() {
   const isLoggedIn = localStorage.getItem('accessToken') && localStorage.getItem('userId');
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="navbar-custom">
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img src={Logo} alt="logo" className='rounded-circle' style={{ width: '2.5em', height: 'auto' }} />
