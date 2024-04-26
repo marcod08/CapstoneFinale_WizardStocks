@@ -45,13 +45,12 @@ const Auth = () => {
   };
 
   return (
-    <Container>
-      <h2 className='mt-3 mb-0'>Login</h2>
+    <Container className="d-flex justify-content-center">
+      <div className="col-md-3 blurred-box">
+      <h2 className='mb-0'>Login</h2>
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-      <div className="d-flex justify-content-center mt-3">
-        <Col md={3}>
-          <Form onSubmit={handleSubmit}>
+          <Form className='mt-3' onSubmit={handleSubmit}>
 
             <Form.Group controlId="email">
               <Form.Label>Email:</Form.Label>
@@ -83,7 +82,6 @@ const Auth = () => {
 
             <Link to="/registration"><p className='mt-2'>Don't have an account? Sign up here.</p></Link>
           </Form>
-        </Col>
       </div>
     </Container>
   );

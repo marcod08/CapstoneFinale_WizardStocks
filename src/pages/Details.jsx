@@ -77,12 +77,13 @@ const Details = () => {
     }, [isFavorite, cardId, accessToken]);
 
     return (
-        <Container className="mt-3">
+        <Container className="d-flex justify-content-center">
+            <div className="col-md-9 blurred-box">
             {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
             {successMessage && <Alert variant="success">{successMessage}</Alert>}
             {card && (
                 <div className="d-flex justify-content-center">
-                    <Col md={7}>
+                    <Col md={9}>
                     <DetailsCard 
                         card={card} 
                         isFavorite={isFavorite} 
@@ -92,6 +93,7 @@ const Details = () => {
                     
                 </div>
             )}
+            </div>
         </Container>
     );
 };

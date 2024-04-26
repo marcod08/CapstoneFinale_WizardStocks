@@ -22,7 +22,7 @@ function TopPricedCardTable({ top10PricedCards, handleResetFilter, handleFilter 
                 </Col>
             </Row>
             <Row className='d-flex justify-content-center'>
-                <Col md={6}>
+                <Col md={8}>
                     <Table className='mt-3 mb-0' bordered hover>
                         <thead>
                             <tr>

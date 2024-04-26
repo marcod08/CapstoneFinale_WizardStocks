@@ -54,8 +54,9 @@ const Favs = () => {
   const currentCards = favoriteCards.slice(indexOfFirstCard, indexOfLastCard);
 
   return (
-    <Container>
-      <h2 className='mt-3'>Favorite Cards</h2>
+    <Container className='d-flex justify-content-center'>
+      <div className="col-md-9 blurred-box">
+      <h2>Favorite Cards</h2>
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
 
       <Row>
@@ -98,6 +99,7 @@ const Favs = () => {
             </>
           )}
         </Pagination>
+      </div>
       </div>
     </Container>
   );

@@ -44,7 +44,7 @@ const SearchBar = ({ handleSearch }) => {
             <Form onSubmit={handleSubmit} className='d-flex'>
                 <FormControl
                     type="text"
-                    placeholder="Search"
+                    placeholder="Search some cards"
                     className="mr-sm-2 text-center"
                     value={searchQuery}
                     onChange={handleChange}

@@ -47,14 +47,16 @@ function Stocks() {
     };
 
     return (
-        <Container>
+        <Container className="d-flex justify-content-center">
+            <div className="col-md-9 blurred-box">
             {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-            <h2 className='mt-3 mb-0'>Top expensive cards of the day</h2>
+            <h2 className='mb-0'>Top expensive cards of the day</h2>
             <TopPricedCardTable
                 top10PricedCards={top10PricedCards}
                 handleResetFilter={handleResetFilter}
                 handleFilter={handleFilter}
             />
+            </div>
         </Container>
     );
 }

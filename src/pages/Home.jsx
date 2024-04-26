@@ -41,18 +41,20 @@ const Home = () => {
 
     return (
         <Container className="d-flex justify-content-center"> {/* continua a lavorare da qui */}
-            <div className="col-8" style={{ backdropFilter: 'blur(10px)' }}>
+            <div className="col-md-9 blurred-box">
                 {errorMessage && <Alert className='mt-3 mb-0' variant="danger">{errorMessage}</Alert>}
 
-                <h1 className="mt-3"> <strong>WizardStock</strong> </h1>
-                <p className="fw-light fs-4">is a search tool for "Magic: The Gathering" cards that helps you invest in them</p>
+                {currentCards.length === 0 && !errorMessage && (
+                    <>
+                        <h1 className=""> <strong>WizardStock</strong> </h1>
+                        <p className="fw-light fs-4 mb-3">is a search tool for "Magic: The Gathering" cards that helps you invest in them</p>
+                        {/*<img src={Logo} alt="logo" className="mt-2 rounded-circle " style={{ width: '15%' }} ></img> */}
+                    </>
+                )}
 
-                <img src={Logo} alt="logo" className="mt-2 rounded-circle " style={{ width: '15%' }} ></img>
 
-
-
-                <div className="d-flex justify-content-center mt-3">
-                    <Col md={3}>
+                <div className="d-flex justify-content-center">
+                    <Col md={6}>
                         <SearchBar handleSearch={handleSearch} className='col-md-6' />
                     </Col>
                 </div>

@@ -24,10 +24,10 @@ function MyNavbar() {
         <Navbar.Brand as={Link} to="/">
           <img src={Logo} alt="logo" className='rounded-circle' style={{ width: '2.5em', height: 'auto' }} />
         </Navbar.Brand>
-        <Nav.Link className='fw-bold fs-6' as={Link} to="/">WizardStocks</Nav.Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+            <Nav.Link className='fw-bold' as={Link} to="/">WizardStocks</Nav.Link>
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/stocks">Stocks</Nav.Link>
             {isLoggedIn &&
