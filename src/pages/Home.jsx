@@ -46,15 +46,15 @@ const Home = () => {
 
                 {currentCards.length === 0 && !errorMessage && (
                     <>
-                        <h1 className=""> <strong>WizardStock</strong> </h1>
-                        <p className="fw-light fs-4">is a search tool for "Magic: The Gathering" cards that helps you invest in them</p>
-                        {/*<img src={Logo} alt="logo" className="mt-2 rounded-circle " style={{ width: '15%' }} ></img> */}
+                        <h1 className="fw-bold"> <strong>WizardStocks</strong> </h1>
+                        <p className="fw-light fs-4 mb-0">is a search tool for "Magic: The Gathering" cards that helps you invest in them</p>
+                        <img src={Logo} alt="logo" className="my-3 rounded-circle " style={{ width: '20%' }} ></img>
                     </>
                 )}
 
 
-                <div className="d-flex justify-content-center mt-3">
-                    <Col md={6}>
+                <div className="d-flex justify-content-center mt-2">
+                    <Col md={4}>
                         <SearchBar handleSearch={handleSearch} className='col-md-6' />
                     </Col>
                 </div>

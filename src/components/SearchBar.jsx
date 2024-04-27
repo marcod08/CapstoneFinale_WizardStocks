@@ -53,9 +53,11 @@ const SearchBar = ({ handleSearch }) => {
             {searchResults.length > 0 && (
                 <div>
                     {searchResults.map((card) => (
-                        <p className='mt-1 mb-1 me-5' key={card.id} onClick={() => handleItemClick(card.name)}>
-                            {card.name}
-                        </p>
+                        <div className='suggestionDiv'>
+                            <p className='mt-1 mb-1' key={card.id} onClick={() => handleItemClick(card.name)}>
+                                {card.name}
+                            </p>
+                        </div>
                     ))}
                 </div>
             )}

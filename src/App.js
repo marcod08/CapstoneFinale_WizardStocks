@@ -10,7 +10,8 @@ import Registration from './pages/Registration';
 import UserPanel from './pages/UserPanel';
 import Footer from './components/Footer';
 import NotFound from './pages/NotFound';
-import Stocks from './pages/Stocks';
+import Expensive from './pages/Expensive';
+import Reserved from './pages/Reserved';
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/details/:cardId' element={<Details />} />
           <Route path='/favs' element={<Favs />} />
-          <Route path='/stocks' element={<Stocks />}></Route>
+          <Route path='/expensive' element={<Expensive />}></Route>
+          <Route path='/reserved' element={<Reserved />}></Route>
           <Route path='/auth' element={<Auth />} />
           <Route path='/registration' element={<Registration />} />
           <Route path='/panel' element={<UserPanel />} />

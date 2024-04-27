@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Alert } from 'react-bootstrap';
 import TopPricedCardTable from '../components/TopPricedCardsTable';
 
-function Stocks() {
+function Expensive() {
     const [top10PricedCards, setTop10PricedCards] = useState([]);
     const [filterFormat, setFilterFormat] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
@@ -13,8 +13,8 @@ function Stocks() {
                 // Fetch delle carte da scryfall che costano piu di 20 dollari
                 const response = await fetch(`https://api.scryfall.com/cards/search?q=usd%3E%3D20&order=usd`);
                 const data = await response.json();
-                let cards = data.data.filter(card => card.prices.usd);
-                let filteredCards = [];
+                const cards = data.data.filter(card => card.prices.usd);
+                const filteredCards = [];
 
                 if (filterFormat) {
                     for (let i = 0; i < cards.length; i++) {
@@ -27,7 +27,7 @@ function Stocks() {
                 }
 
                 const sortedCards = cards.sort((a, b) => parseFloat(b.prices.usd) - parseFloat(a.prices.usd));
-                const top10Cards = sortedCards.slice(0, 10);
+                const top10Cards = sortedCards.slice(0, 12);
                 setTop10PricedCards(top10Cards);
             } catch (error) {
                 console.error('Error fetching cards:', error);
@@ -61,4 +61,4 @@ function Stocks() {
     );
 }
 
-export default Stocks;
+export default Expensive;

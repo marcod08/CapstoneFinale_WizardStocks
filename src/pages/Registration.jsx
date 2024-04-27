@@ -52,8 +52,8 @@ const Registration = () => {
 
   return (
     <Container className="d-flex justify-content-center">
-      <div className="col-md-4 blurred-box">
-        <h2 className='mb-0'>Registration</h2>
+      <div className="col-md-3 blurred-box">
+        <h2 className='mb-0 fw-bold'>Registration</h2>
 
         {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
         {successMessage && <Alert variant="success">Registration successful. Redirecting to login page...</Alert>}
@@ -139,9 +139,9 @@ const Registration = () => {
             </div>
           </Form.Group>
 
-          <Button className='mt-3 me-2' variant="primary" type="submit">Register</Button>
+          <Button className='mt-3 me-2 button-hover' variant="primary" type="submit">Register</Button>
           <Link to={{ pathname: `/` }}>
-            <Button className='mt-3' variant="danger">Go to Home</Button>
+            <Button className='mt-3 button-hover' variant="danger">Go to Home</Button>
           </Link>
         </Form>
       </div>

@@ -59,3 +59,32 @@ a.nav-link {
 .rounded-custom {
   border-radius: 0.8em !important;
 }
+
+/* animazione per le imagini */
+.image-hover {
+  transition: transform 0.3s ease;
+}
+
+.image-hover:hover {
+  transform: scale(1.05);
+}
+
+/* animazione per i bottoni */
+.button-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* animazione per i link navbar */
+.nav-link-hover {
+  transition: transform 0.2s ease;
+}
+
+.nav-link-hover:hover {
+  transform: translateY(-2px);
+}
+

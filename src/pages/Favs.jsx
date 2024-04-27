@@ -56,7 +56,7 @@ const Favs = () => {
   return (
     <Container className='d-flex justify-content-center'>
       <div className="col-md-9 blurred-box">
-      <h2>Favorite Cards</h2>
+      <h2 className='fw-bold'>Favorite Cards</h2>
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
 
       <Row>

@@ -83,8 +83,8 @@ const UserPanel = () => {
 
     return (
         <Container className="d-flex justify-content-center">
-            <div className="col-md-4 blurred-box">
-                <h2 className='mb-0'>User Panel</h2>
+            <div className="col-md-3 blurred-box">
+                <h2 className='mb-0 fw-bold'>User Panel</h2>
                 {successMessage && <Alert variant="success">{successMessage}</Alert>}
                 {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
 
@@ -143,9 +143,9 @@ const UserPanel = () => {
                         </div>
                     </Form.Group>
 
-                    <Button className='mt-3 me-2' variant="primary" type="submit">Save</Button>
+                    <Button className='mt-3 me-2 button-hover' variant="primary" type="submit">Save</Button>
                     <Link to={{ pathname: `/` }}>
-                        <Button className='mt-3' variant="danger">Go to Home</Button>
+                        <Button className='mt-3 button-hover' variant="danger">Go to Home</Button>
                     </Link>
 
                 </Form>

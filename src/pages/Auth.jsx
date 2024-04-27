@@ -46,8 +46,8 @@ const Auth = () => {
 
   return (
     <Container className="d-flex justify-content-center">
-      <div className="col-md-4 blurred-box">
-      <h2 className='mb-0'>Login</h2>
+      <div className="col-md-3 blurred-box">
+      <h2 className='mb-0 fw-bold'>Login</h2>
       {successMessage && <Alert className='my-2' variant="success">{successMessage}</Alert>}
       {errorMessage && <Alert className='my-2' variant="danger">{errorMessage}</Alert>}
           <Form className='mt-3' onSubmit={handleSubmit}>
@@ -76,7 +76,7 @@ const Auth = () => {
               />
             </Form.Group>
 
-            <Button className='mt-3' variant="primary" type="submit">
+            <Button className='mt-3 button-hover' variant="primary" type="submit">
               Login
             </Button>
 

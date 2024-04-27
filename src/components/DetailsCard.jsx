@@ -6,7 +6,7 @@ const DetailsCard = ({ card, isFavorite, toggleFavorite }) => {
     const isLoggedIn = localStorage.getItem('accessToken') && localStorage.getItem('userId');
 
     return (
-        <div>
+        <>
             <Row>
                 <Col md={5} className='rounded-custom'>
                     <img
@@ -43,20 +43,20 @@ const DetailsCard = ({ card, isFavorite, toggleFavorite }) => {
                         </table>
 
                         {isLoggedIn && !isFavorite && (
-                            <Button variant="primary" onClick={toggleFavorite}>
+                            <Button className='button-hover' variant="primary" onClick={toggleFavorite}>
                                 Add to favorites
                             </Button>
                         )}
 
                         {isLoggedIn && isFavorite && (
-                            <Button variant="danger" onClick={toggleFavorite}>
+                            <Button className='button-hover' variant="danger" onClick={toggleFavorite}>
                                 Remove from favorites
                             </Button>
                         )}
                     </div>
                 </Col>
             </Row>
-        </div>
+        </>
     );
 }
 
