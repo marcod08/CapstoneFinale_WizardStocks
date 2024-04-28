@@ -4,7 +4,7 @@ Una applicazione web sviluppata utilizzando React per il frontend e ASP.NET Fram
 
 ## Funzionalità principali
 
-* Ricerca di Carte: Gli utenti possono cercare le carte Magic in base al loro nome
+* Ricerca di Carte: Gli utenti possono cercare le carte Magic in base al loro nome.
 * Salvataggio di Carte Preferite: Gli utenti possono salvare le loro carte preferite per accedervi facilmente in seguito.
 * Controllo dei Prezzi: L'applicazione fornisce informazioni sui prezzi delle carte Magic aggiornate.
 * Gestione dell'Account: Sul backend è possibile registrare un account, effettuare il login e modificare le proprie credenziali o dati.
