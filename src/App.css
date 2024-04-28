@@ -88,3 +88,8 @@ a.nav-link {
   transform: translateY(-2px);
 }
 
+/* classe custom per dare opacità */
+.opc {
+  opacity: 0.8;
+}
+

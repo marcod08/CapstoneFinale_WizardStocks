@@ -83,7 +83,7 @@ const UserPanel = () => {
 
     return (
         <Container className="d-flex justify-content-center">
-            <div className="col-md-3 blurred-box">
+            <div className="col-md-4 blurred-box">
                 <h2 className='mb-0 fw-bold'>User Panel</h2>
                 {successMessage && <Alert variant="success">{successMessage}</Alert>}
                 {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
@@ -92,22 +92,22 @@ const UserPanel = () => {
 
                     <Form.Group controlId="email">
                         <Form.Label> Edit Email:</Form.Label>
-                        <Form.Control className='text-center' type="email" name="email" value={user.email} onChange={handleChange} />
+                        <Form.Control className='text-center opc' type="email" name="email" value={user.email} onChange={handleChange} />
                     </Form.Group>
 
                     <Form.Group controlId="password">
                         <Form.Label className='mt-2'>New Password:</Form.Label>
-                        <Form.Control className='text-center' type="password" name="password" placeholder='set your new password' value={password} onChange={handleChange} />
+                        <Form.Control className='text-center opc' type="password" name="password" placeholder='set your new password' value={password} onChange={handleChange} />
                     </Form.Group>
 
                     <Form.Group controlId="confirmPassword">
                         <Form.Label className='mt-2'>Confirm new Password:</Form.Label>
-                        <Form.Control className='text-center' type="password" name="confirmPassword" placeholder='confirm your new password' value={confirmPassword} onChange={handleChange} />
+                        <Form.Control className='text-center opc' type="password" name="confirmPassword" placeholder='confirm your new password' value={confirmPassword} onChange={handleChange} />
                     </Form.Group>
 
                     <Form.Group controlId="birthDate">
                         <Form.Label className='mt-2'>Edit Birth Date:</Form.Label>
-                        <Form.Control className='text-center' type="date" name="birthDate" value={user.birthDate} onChange={handleChange} />
+                        <Form.Control className='text-center opc' type="date" name="birthDate" value={user.birthDate} onChange={handleChange} />
                     </Form.Group>
 
                     <Form.Group controlId="gender">

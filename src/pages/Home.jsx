@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Pagination, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Pagination, Alert, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SearchBar from "../components/SearchBar";
 import MainCard from "../components/MainCard";
 import Logo from "../assets/images/logo.jpg";
-
+import Loader from "../components/Loader";
 
 const Home = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [cardsPerPage] = useState(8);
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false); 
 
     // Fetch della searchbar
     const handleSearch = async (query) => {
+        setLoading(true);
         try {
             const response = await fetch(`https://api.scryfall.com/cards/search?q=${query}`);
             if (!response.ok) {
@@ -30,6 +32,8 @@ const Home = () => {
             } else {
                 setErrorMessage('An error occurred during the search.');
             }
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -40,11 +44,14 @@ const Home = () => {
     const currentCards = searchResults.slice(indexOfFirstCard, indexOfLastCard);
 
     return (
-        <Container className="d-flex justify-content-center"> {/* continua a lavorare da qui */}
+        <Container className="d-flex justify-content-center">
             <div className="col-md-9 blurred-box">
-                {errorMessage && <Alert className='mt-3 mb-0' variant="danger">{errorMessage}</Alert>}
+                
+                {errorMessage && !loading && (
+                    <Alert className='mt-3 mb-0' variant="danger">{errorMessage}</Alert>
+                )}
 
-                {currentCards.length === 0 && !errorMessage && (
+                {currentCards.length === 0 && !errorMessage && !loading && (
                     <>
                         <h1 className="fw-bold"> <strong>WizardStocks</strong> </h1>
                         <p className="fw-light fs-4 mb-0">is a search tool for "Magic: The Gathering" cards that helps you invest in them</p>
@@ -52,12 +59,17 @@ const Home = () => {
                     </>
                 )}
 
-
                 <div className="d-flex justify-content-center mt-2">
                     <Col md={4}>
                         <SearchBar handleSearch={handleSearch} className='col-md-6' />
                     </Col>
                 </div>
+
+                {loading && (
+                    <div className="d-flex justify-content-center my-5">
+                        <Loader />
+                    </div>
+                )}
 
                 <Row>
                     {currentCards.map(card => (
@@ -70,7 +82,7 @@ const Home = () => {
                 </Row>
 
                 {/* Pagination */}
-                {searchResults.length > 0 && (
+                {searchResults.length > 0 && !loading && (
                     <div className="d-flex justify-content-center mt-3">
                         <Pagination className="mb-0">
                             {currentPage > 1 && (

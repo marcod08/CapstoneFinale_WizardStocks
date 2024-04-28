@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Container, Form, Button, Col, Alert } from 'react-bootstrap';
+import { Container, Form, Button, Alert } from 'react-bootstrap';
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const Auth = () => {
 
   return (
     <Container className="d-flex justify-content-center">
-      <div className="col-md-3 blurred-box">
+      <div className="col-md-4 blurred-box">
       <h2 className='mb-0 fw-bold'>Login</h2>
       {successMessage && <Alert className='my-2' variant="success">{successMessage}</Alert>}
       {errorMessage && <Alert className='my-2' variant="danger">{errorMessage}</Alert>}
@@ -55,7 +55,7 @@ const Auth = () => {
             <Form.Group controlId="email">
               <Form.Label>Email:</Form.Label>
               <Form.Control
-                className='text-center'
+                className='text-center opc'
                 type="email"
                 placeholder="Enter your email"
                 required
@@ -67,7 +67,7 @@ const Auth = () => {
             <Form.Group controlId="password">
               <Form.Label className='mt-2'>Password:</Form.Label>
               <Form.Control
-                className='text-center'
+                className='text-center opc'
                 type="password"
                 placeholder="Enter your password"
                 required
@@ -80,7 +80,7 @@ const Auth = () => {
               Login
             </Button>
 
-            <Link to="/registration"><p className='mt-2 text-light'>Don't have an account? Sign up here.</p></Link>
+            <Link to="/registration"><p className='mt-2 text-light text-decoration-underline'>Don't have an account? Sign up here.</p></Link>
           </Form>
       </div>
     </Container>

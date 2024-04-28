@@ -40,8 +40,8 @@ function MyNavbar() {
           <Nav className="ml-auto">
             {isLoggedIn ? (
               <NavDropdown title={<Image src={profilePic} alt="profile" className='nav-link-hover' roundedCircle style={{ width: '2.2em', height: 'auto' }} />} id="basic-nav-dropdown">
-                <NavDropdown.Item className='nav-link-hover' as={Link} to="/panel">User Panel</NavDropdown.Item>
-                <NavDropdown.Item className='nav-link-hover' onClick={handleLogout}>Logout</NavDropdown.Item>
+                <NavDropdown.Item className='nav-link-hover opc' as={Link} to="/panel">User Panel</NavDropdown.Item>
+                <NavDropdown.Item className='nav-link-hover opc' onClick={handleLogout}>Logout</NavDropdown.Item>
               </NavDropdown>
             ) : (
               <>

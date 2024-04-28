@@ -45,7 +45,7 @@ const SearchBar = ({ handleSearch }) => {
                 <FormControl
                     type="text"
                     placeholder="Search any cards"
-                    className="mr-sm-2 text-center"
+                    className="mr-sm-2 text-center opc"
                     value={searchQuery}
                     onChange={handleChange}
                 />
@@ -53,7 +53,7 @@ const SearchBar = ({ handleSearch }) => {
             {searchResults.length > 0 && (
                 <div>
                     {searchResults.map((card) => (
-                        <div className='suggestionDiv'>
+                        <div>
                             <p className='mt-1 mb-1' key={card.id} onClick={() => handleItemClick(card.name)}>
                                 {card.name}
                             </p>

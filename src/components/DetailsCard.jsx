@@ -21,7 +21,7 @@ const DetailsCard = ({ card, isFavorite, toggleFavorite }) => {
                         <h2>{card.name}</h2>
                         <p>{card.type_line}</p>
                         <p>{card.oracle_text}</p>
-                        <table className="table">
+                        <table className="table opc">
                             <thead>
                                 <tr>
                                     <th>USD</th>

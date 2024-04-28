@@ -52,7 +52,7 @@ const Registration = () => {
 
   return (
     <Container className="d-flex justify-content-center">
-      <div className="col-md-3 blurred-box">
+      <div className="col-md-4 blurred-box">
         <h2 className='mb-0 fw-bold'>Registration</h2>
 
         {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
@@ -62,7 +62,7 @@ const Registration = () => {
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email:</Form.Label>
             <Form.Control
-              className='text-center'
+              className='text-center opc'
               type="email"
               placeholder="Enter your email"
               value={email}
@@ -74,7 +74,7 @@ const Registration = () => {
           <Form.Group controlId="formBasicPassword">
             <Form.Label className='mt-2'>Password:</Form.Label>
             <Form.Control
-              className='text-center'
+              className='text-center opc'
               type="password"
               placeholder="Enter your password"
               value={password}
@@ -86,7 +86,7 @@ const Registration = () => {
           <Form.Group controlId="formBasicConfirmPassword">
             <Form.Label className='mt-2'>Confirm Password:</Form.Label>
             <Form.Control
-              className='text-center'
+              className='text-center opc'
               type="password"
               placeholder="Confirm your Password"
               value={confirmPassword}
@@ -98,7 +98,7 @@ const Registration = () => {
           <Form.Group controlId="formBasicBirthdate">
             <Form.Label className='mt-2'>Date of Birth:</Form.Label>
             <Form.Control
-              className='text-center'
+              className='text-center opc'
               type="date"
               value={birthdate}
               onChange={(e) => setBirthdate(e.target.value)}

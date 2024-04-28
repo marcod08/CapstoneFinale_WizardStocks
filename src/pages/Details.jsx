@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Container, Row, Col, Alert } from 'react-bootstrap';
+import { Container, Col, Alert } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import DetailsCard from "../components/DetailsCard";
+import Loader from "../components/Loader";
 
 
 const Details = () => {
@@ -10,6 +11,7 @@ const Details = () => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
+    const [loading, setLoading] = useState(true);
     const accessToken = localStorage.getItem('accessToken');
 
     useEffect(() => {
@@ -22,8 +24,10 @@ const Details = () => {
                 }
                 const cardData = await response.json();
                 setCard(cardData);
+                setLoading(false);
             } catch (error) {
                 setErrorMessage('An error occurred while retrieving the card.');
+                setLoading(false);
             }
         };
 
@@ -79,20 +83,24 @@ const Details = () => {
     return (
         <Container className="d-flex justify-content-center">
             <div className="col-md-9 blurred-box">
-            {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-            {successMessage && <Alert variant="success">{successMessage}</Alert>}
-            {card && (
-                <div className="d-flex justify-content-center">
-                    <Col md={12}>
-                    <DetailsCard 
-                        card={card} 
-                        isFavorite={isFavorite} 
-                        toggleFavorite={toggleFavorite} 
-                    />
-                    </Col>
-                    
-                </div>
-            )}
+                {loading &&
+                    <div className="d-flex justify-content-center my-5">
+                        <Loader />
+                    </div>}
+                {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+                {successMessage && <Alert variant="success">{successMessage}</Alert>}
+                {card && !loading && (
+                    <div className="d-flex justify-content-center">
+                        <Col md={12}>
+                            <DetailsCard
+                                card={card}
+                                isFavorite={isFavorite}
+                                toggleFavorite={toggleFavorite}
+                            />
+                        </Col>
+
+                    </div>
+                )}
             </div>
         </Container>
     );
