@@ -15,4 +15,7 @@ Una applicazione web sviluppata utilizzando React per il frontend e ASP.NET Fram
 * Backend: ASP.NET Framework (4.8.1)
 * Database: SQL Server
 
-(Readme ancora da completare, aggiungerò delle foto/video delle funzionalità a breve)
+##
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/GCFh40d6alM/0.jpg)](https://www.youtube.com/watch?v=GCFh40d6alM)
+
