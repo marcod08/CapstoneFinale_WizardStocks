@@ -3,6 +3,7 @@ import { Container, Col, Alert } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import DetailsCard from "../components/DetailsCard";
 import Loader from "../components/Loader";
+import { myApiDomain } from '../components/MyApiDomain';
 
 
 const Details = () => {
@@ -40,7 +41,7 @@ const Details = () => {
         if (userId) {
             const fetchFavorites = async () => {
                 try {
-                    const favsResponse = await fetch(`https://localhost:44365/api/favs/${userId}`, {
+                    const favsResponse = await fetch(`${myApiDomain}/api/favs/${userId}`, {
                         headers: {
                             'Authorization': `Bearer ${accessToken}`
                         }
@@ -62,7 +63,7 @@ const Details = () => {
     const toggleFavorite = useCallback(async () => {
         const userId = localStorage.getItem('userId');
         try {
-            const response = await fetch(`https://localhost:44365/api/favs`, {
+            const response = await fetch(`${myApiDomain}/api/favs`, {
                 method: isFavorite ? 'DELETE' : 'POST',
                 headers: {
                     'Content-Type': 'application/json',

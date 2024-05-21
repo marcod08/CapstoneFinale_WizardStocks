@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
+import { myApiDomain } from '../components/MyApiDomain';
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://localhost:44365/api/Users/Login', {
+      const response = await fetch(`${myApiDomain}/api/Users/Login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

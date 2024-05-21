@@ -3,6 +3,7 @@ import MainCard from '../components/MainCard';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Pagination, Alert } from 'react-bootstrap';
 import Loader from '../components/Loader';
+import { myApiDomain } from '../components/MyApiDomain';
 
 const Favs = () => {
   const userId = localStorage.getItem('userId');
@@ -19,7 +20,7 @@ const Favs = () => {
         setLoading(true);
 
         if (userId && accessToken) {
-          const response = await fetch(`https://localhost:44365/api/favs/${userId}`, {
+          const response = await fetch(`${myApiDomain}/api/favs/${userId}`, {
             headers: {
               'Authorization': `Bearer ${accessToken}`
             }

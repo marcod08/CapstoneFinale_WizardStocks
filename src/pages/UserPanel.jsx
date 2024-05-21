@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { myApiDomain } from '../components/MyApiDomain';
 
 const UserPanel = () => {
     const userId = localStorage.getItem('userId');
@@ -19,7 +20,7 @@ const UserPanel = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await fetch(`https://localhost:44365/api/Users/${userId}`, {
+                const response = await fetch(`${myApiDomain}/api/Users/${userId}`, {
                     headers: {
                         'Authorization': `Bearer ${accessToken}`
                     }
@@ -60,7 +61,7 @@ const UserPanel = () => {
             return;
         }
         try {
-            const response = await fetch(`https://localhost:44365/api/Users/${userId}`, {
+            const response = await fetch(`${myApiDomain}/api/Users/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

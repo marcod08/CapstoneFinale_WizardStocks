@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Form, FormControl, Button } from 'react-bootstrap';
-import { BsSearch } from 'react-icons/bs';
+import { Form, FormControl } from 'react-bootstrap';
 
 const SearchBar = ({ handleSearch }) => {
     const [searchQuery, setSearchQuery] = useState('');

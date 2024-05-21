@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Col, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { myApiDomain } from '../components/MyApiDomain';
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Registration = () => {
     }
 
     try {
-      const response = await fetch('https://localhost:44365/api/Users', {
+      const response = await fetch(`${myApiDomain}/api/Users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
