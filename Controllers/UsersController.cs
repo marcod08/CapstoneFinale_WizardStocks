@@ -172,8 +172,15 @@ namespace WizardStocks.Controllers
 
         private string GenerateAccessToken(User user)
         {
+            //Recupero la chiave segreta
+            var secretKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY");
+            if (string.IsNullOrEmpty(secretKey))
+            {
+                throw new InvalidOperationException("JWT secret key is not defined in environment variables.");
+            }
+
             // Chiave segreta 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("JSNB£s&q0sjvnUQ&NDccsjdnVoa%oasNAGnvkj62casLANCJ2nnc%ja&nAh479bsnHb&$"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
 
             // Credenziali 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
